@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { fetchData } from "../helpers";
 
 type dashboardLoaderData = {
-  userName: string;
+  userName?: string;
 };
 
 export const dashboardLoader = () => {
@@ -16,7 +16,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>{userName}</h1>
+      <h1>{userName || ""}</h1>
       Dashboard
     </div>
   );
