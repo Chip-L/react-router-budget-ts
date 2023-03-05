@@ -11,5 +11,5 @@ export interface Expense {
   name: string;
   amount: number;
   budgetId: string;
-  createdAd: number;
+  createdAt: number;
 }

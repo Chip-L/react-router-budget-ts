@@ -3,3 +3,6 @@ export const formatCurrency = (amt: number) =>
 
 export const formatPercentage = (amt: number) =>
   amt.toLocaleString(undefined, { style: "percent", minimumFractionDigits: 0 });
+
+export const formatDate = (epoch: number) =>
+  new Date(epoch).toLocaleDateString();

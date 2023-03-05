@@ -1,22 +1,27 @@
 import { ActionFunctionArgs, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
+import ExpenseTable from "../components/ExpenseTable";
 import Intro from "../components/Intro";
+
 import { createExpense, createBudget, fetchData, wait } from "../utils/helpers";
-import { Budget } from "../types";
+import { Budget, Expense } from "../types";
 
 type dashboardLoaderData = {
   userName: string | null;
   budgets: Budget[];
+  expenses: Expense[];
 };
 
 export const dashboardLoader = () => {
   const userName = fetchData("userName") as string | null;
   const budgets: Budget[] = fetchData("budgets") ?? [];
+  const expenses: Expense[] = fetchData("expenses") ?? [];
 
-  return { userName, budgets };
+  return { userName, budgets, expenses };
 };
 
 export const dashboardAction = async ({ request }: ActionFunctionArgs) => {
@@ -48,7 +53,7 @@ export const dashboardAction = async ({ request }: ActionFunctionArgs) => {
     case "createExpense":
       try {
         createExpense({
-          name: values.addExpense as string,
+          name: values.newExpense as string,
           amount: +(values.newExpenseAmount as string),
           budgetId: values.newExpenseBudget as string,
         });
@@ -65,7 +70,8 @@ export const dashboardAction = async ({ request }: ActionFunctionArgs) => {
 };
 
 function Dashboard() {
-  const { userName, budgets } = useLoaderData() as dashboardLoaderData;
+  const { userName, budgets, expenses } =
+    useLoaderData() as dashboardLoaderData;
 
   return (
     <>
@@ -81,12 +87,24 @@ function Dashboard() {
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
                 </div>
+
                 <h2>Existing Budgets</h2>
                 <div className="budgets">
                   {budgets.map((budget) => (
                     <BudgetItem key={budget.id} budget={budget} />
                   ))}
                 </div>
+
+                {expenses && expenses.length > 0 ? (
+                  <div className="grid-md">
+                    <h2>Recent Expenses</h2>
+                    <ExpenseTable
+                      expenses={expenses.sort(
+                        (a, b) => b.createdAt - a.createdAt
+                      )}
+                    />
+                  </div>
+                ) : null}
               </div>
             ) : (
               <div className="grid-sm">

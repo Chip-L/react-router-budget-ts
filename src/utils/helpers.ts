@@ -26,12 +26,12 @@ export const createBudget = ({
 }) => {
   const existingBudgets: Budget[] = fetchData("budgets") ?? [];
 
-  const newItem = {
+  const newItem: Budget = {
     id: crypto.randomUUID(),
     name,
     amount: amount,
     color: generateRandomColor(existingBudgets.length),
-    createdAd: Date.now(),
+    createdAt: Date.now(),
   };
 
   return localStorage.setItem(
@@ -51,12 +51,12 @@ export const createExpense = ({
 }) => {
   const existingExpenses: Expense[] = fetchData("expenses") ?? [];
 
-  const newItem = {
+  const newItem: Expense = {
     id: crypto.randomUUID(),
     name,
     amount: amount,
     budgetId,
-    createdAd: Date.now(),
+    createdAt: Date.now(),
   };
 
   return localStorage.setItem(
