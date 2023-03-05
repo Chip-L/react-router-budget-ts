@@ -2,8 +2,9 @@ import { ActionFunctionArgs, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
+import BudgetItem from "../components/BudgetItem";
 import Intro from "../components/Intro";
-import { createExpense, createBudget, fetchData, wait } from "../helpers";
+import { createExpense, createBudget, fetchData, wait } from "../utils/helpers";
 import { Budget } from "../types";
 
 type dashboardLoaderData = {
@@ -79,6 +80,12 @@ function Dashboard() {
                 <div className="flex-lg">
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
+                </div>
+                <h2>Existing Budgets</h2>
+                <div className="budgets">
+                  {budgets.map((budget) => (
+                    <BudgetItem key={budget.id} budget={budget} />
+                  ))}
                 </div>
               </div>
             ) : (

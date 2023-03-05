@@ -1,4 +1,4 @@
-import { Budget, Expense } from "./types";
+import { Budget, Expense } from "../types";
 
 export const wait = () =>
   new Promise((res) => setTimeout(res, Math.random() * 800));
