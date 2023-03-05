@@ -64,3 +64,16 @@ export const createExpense = ({
     JSON.stringify([...existingExpenses, newItem])
   );
 };
+
+export const calculateSpentByBudget = (budgetId: string) => {
+  const expenses: Expense[] = fetchData("expenses") ?? [];
+
+  const budgetSpent = expenses.reduce((acc, expense) => {
+    if (expense.budgetId === budgetId) {
+      return (acc += expense.amount);
+    }
+    return acc;
+  }, 0);
+
+  return budgetSpent;
+};
