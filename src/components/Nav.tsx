@@ -3,7 +3,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import logoMark from "../assets/logomark.svg";
 
 interface NavProps {
-  userName: string;
+  userName?: string;
 }
 
 function Nav({ userName }: NavProps) {

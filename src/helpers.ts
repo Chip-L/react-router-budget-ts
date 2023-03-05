@@ -1,5 +1,7 @@
 export const fetchData = (key: string) => {
-  return JSON.parse(localStorage.getItem(key) || "");
+  const storage = localStorage.getItem(key) as any;
+
+  return JSON.parse(storage);
 };
 
 export const deleteItem = ({ key }: { key: string }) =>

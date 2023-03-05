@@ -12,19 +12,22 @@ const router = createBrowserRouter([
     path: "/",
     element: <Main />,
     loader: mainLoader,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Dashboard />,
         loader: dashboardLoader,
-        errorElement: <Error />,
       },
       {
         path: "logout",
         action: logoutAction,
       },
     ],
+  },
+  {
+    path: "about",
+    element: <h1>About Page</h1>,
   },
 ]);
 

@@ -3,13 +3,14 @@ import Intro from "../components/Intro";
 import { fetchData } from "../helpers";
 
 type dashboardLoaderData = {
-  userName: string;
+  userName: string | null;
 };
 
 export const dashboardLoader = () => {
-  const userName = fetchData("userName") as string;
-
   console.log("dashboardLoader:");
+  const userName = fetchData("userName") as string | null;
+  console.log("dashboardLoader username:", { userName });
+
   return { userName };
 };
 
