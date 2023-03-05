@@ -10,7 +10,6 @@ type dashboardLoaderData = {
 
 export const mainLoader = () => {
   const userName = fetchData("userName");
-  console.log("userName:", userName);
   return { userName };
 };
 
