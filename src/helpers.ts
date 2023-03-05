@@ -1,5 +1,8 @@
 import { Budget } from "./types";
 
+export const wait = () =>
+  new Promise((res) => setTimeout(res, Math.random() * 800));
+
 // does multiplication on an HSL color function -- this is not actually returning HSL
 // 34 is a magic number (increments the hue)
 const generateRandomColor = (existingBudgetsLength: number) =>
